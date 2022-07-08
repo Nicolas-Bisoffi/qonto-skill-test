@@ -76,9 +76,6 @@ target/
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
 
-# exclude data from source control by default
-/data/
-
 # Mac OS-specific storage files
 .DS_Store
 
@@ -94,3 +91,5 @@ data/raw/*
 outputs/models/*
 !data/processed/.gitkeep
 !data/raw/.gitkeep
+!outputs/models/.gitkeep
+!data/README.md
