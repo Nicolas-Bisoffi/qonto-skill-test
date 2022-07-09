@@ -31,6 +31,13 @@ lint:
 	flake8 src
 
 ## Set up python interpreter environment
+create_dev-environment:
+	python3 -m venv .venv-dev
+	source .venv-dev/bin/activate
+	pip install -r requirements-dev.txt
+	python -m ipykernel install --user --name=auto-ds
+
+## Set up python interpreter environment
 create_environment:
 	poetry env use python3.9
 	poetry config virtualenvs.in-project true --local
