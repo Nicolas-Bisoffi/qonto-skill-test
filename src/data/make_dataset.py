@@ -14,10 +14,11 @@ app = typer.Typer()
 
 FRAUD_TYPES: List[str] = ["TRANSFER", "CASH_OUT"]
 USELESS_FEATURES: List[str] = ['nameOrig', 'nameDest', 'isFlaggedFraud']
+filename: str = typer.Argument("PS_20174392719_1491204439457_log", help="dataset filename")
 
 
 @app.command()
-def main():
+def main(filename=filename):
     """
     Runs data processing scripts to turn raw data from (../raw) into
     cleaned data ready for modeling (saved in ../processed).
@@ -27,7 +28,7 @@ def main():
     DIR_DATA_PROCESSED = Path(os.getenv("DIR_DATA_PROCESSED"))
 
     logger.info('Making final data set from raw data')
-    df = pd.read_csv(f"{DIR_DATA_RAW}/PS_20174392719_1491204439457_log.csv")
+    df = pd.read_csv(f"{DIR_DATA_RAW}/{filename}.csv")
     df = df.rename(columns={'oldbalanceOrg': 'oldBalanceOrig', 'newbalanceOrig': 'newBalanceOrig',
                             'oldbalanceDest': 'oldBalanceDest', 'newbalanceDest': 'newBalanceDest'})
 
