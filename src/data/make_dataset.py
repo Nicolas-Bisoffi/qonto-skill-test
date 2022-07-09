@@ -1,19 +1,51 @@
 # -*- coding: utf-8 -*-
-import click
 import logging
-from pathlib import Path
+
+import typer
+import os
 from dotenv import find_dotenv, load_dotenv
+from pathlib import Path
+import pandas as pd
+from typing import List
+from src.features.build_features import compute_balance_error, compute_hours_and_days, fix_null_balances
 
 
-@click.command()
-@click.argument('input_filepath', type=click.Path(exists=True))
-@click.argument('output_filepath', type=click.Path())
-def main(input_filepath, output_filepath):
-    """ Runs data processing scripts to turn raw data from (../raw) into
-        cleaned data ready to be analyzed (saved in ../processed).
+app = typer.Typer()
+
+FRAUD_TYPES: List[str] = ["TRANSFER", "CASH_OUT"]
+USELESS_FEATURES: List[str] = ['nameOrig', 'nameDest', 'isFlaggedFraud']
+
+
+@app.command()
+def main():
+    """
+    Runs data processing scripts to turn raw data from (../raw) into
+    cleaned data ready for modeling (saved in ../processed).
     """
     logger = logging.getLogger(__name__)
-    logger.info('making final data set from raw data')
+    DIR_DATA_RAW = Path(os.getenv("DIR_DATA_RAW"))
+    DIR_DATA_PROCESSED = Path(os.getenv("DIR_DATA_PROCESSED"))
+
+    logger.info('Making final data set from raw data')
+    df = pd.read_csv(f"{DIR_DATA_RAW}/PS_20174392719_1491204439457_log.csv")
+    df = df.rename(columns={'oldbalanceOrg': 'oldBalanceOrig', 'newbalanceOrig': 'newBalanceOrig',
+                            'oldbalanceDest': 'oldBalanceDest', 'newbalanceDest': 'newBalanceDest'})
+
+    df = df.loc[df["type"].isin(FRAUD_TYPES)]
+
+    # Eliminate columns shown to be irrelevant for analysis in the EDA
+    df = df.drop(USELESS_FEATURES, axis=1)
+
+    # Binary-encoding of labelled data in 'type'
+    df.loc[df['type'] == 'TRANSFER', 'type'] = 0
+    df.loc[df['type'] == 'CASH_OUT', 'type'] = 1
+    df["type"] = df["type"].astype(int)  # convert dtype('O') to dtype(int)
+
+    df = fix_null_balances(df)
+    df = compute_balance_error(df)
+    df = compute_hours_and_days(df)
+
+    df.to_csv(f"{DIR_DATA_PROCESSED}/data.csv", index=False)
 
 
 if __name__ == '__main__':
@@ -25,6 +57,7 @@ if __name__ == '__main__':
 
     # find .env automagically by walking up directories until it's found, then
     # load up the .env entries as environment variables
-    load_dotenv(find_dotenv())
+    load_dotenv(find_dotenv(), override=True)
 
-    main()
+    app()
+

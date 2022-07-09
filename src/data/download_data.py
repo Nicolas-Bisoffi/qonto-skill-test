@@ -12,43 +12,24 @@ KAGGLE_FILENAME: str = 'ealaxi/paysim1'
 app = typer.Typer()
 
 
-def kaggle_authentication() -> 'KaggleApi':
-    """
-    Authenticate on Kaggle.
-
-    :return: KaggleApi object used to download data
-    """
-    kaggle_api = KaggleApi()
-    kaggle_api.authenticate()
-    return kaggle_api
-
-
-def download_data(kaggle_api: 'KaggleApi', kaggle_filename: str, data_path: Path) -> None:
-    """
-    Download data from Kaggle.
-
-    :param kaggle_api: Kaggle API object already authenticated
-    :param kaggle_filename: filename on Kaggle
-    :param data_path: folder path where data are stored after download
-    :return: None
-    """
-    kaggle_api.dataset_download_files(kaggle_filename, path=data_path, unzip=True)
-
-
 @app.command()
 def main():
+    """
+    Authenticate on Kaggle using the .env file or ~/.kaggle/kaggle.json file & download data
+    """
     logger = logging.getLogger(__name__)
     DIR_DATA_RAW = Path(os.getenv("DIR_DATA_RAW"))
 
     logger.info(
         "Authenticate on the Kaggle API"
     )
-    kaggle_api = kaggle_authentication()
+    kaggle_api = KaggleApi()
+    kaggle_api.authenticate()
 
     logger.info(
-        "Download data & store in raw data folder"
+        "Download data & store in the raw data folder"
     )
-    download_data(kaggle_api, KAGGLE_FILENAME, DIR_DATA_RAW)
+    kaggle_api.dataset_download_files(KAGGLE_FILENAME, path=DIR_DATA_RAW, unzip=True)
 
 
 if __name__ == '__main__':
