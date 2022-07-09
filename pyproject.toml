@@ -11,12 +11,18 @@ python-dotenv = "^0.20.0"
 kaggle = "^1.5.12"
 typer = "^0.5.0"
 pandas = "^1.4.3"
+scikit-learn = "^1.1.1"
+xgboost = "^1.6.1"
+imbalanced-learn = "^0.9.1"
+optuna = "^2.10.1"
 
 [tool.poetry.dev-dependencies]
 portray = "^1.7.0"
 pytest = "^7.0.0"
 jupyter = "^1.0.0"
 jupyterlab = "^3.2.9"
+matplotlib = "^3.5.2"
+seaborn = "^0.11.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
