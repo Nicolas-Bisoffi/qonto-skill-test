@@ -1,5 +1,3 @@
-from kaggle.api.kaggle_api_extended import KaggleApi
-
 import logging
 
 import typer
@@ -17,6 +15,10 @@ def main():
     """
     Authenticate on Kaggle using the .env file or ~/.kaggle/kaggle.json file & download data
     """
+    # Kaggle check if username & token are in env variables, or in ~/.kaggle/kaggle.json, at the import ...
+    # But .secrets is not yet loaded, then this import is made here ...
+    from kaggle.api.kaggle_api_extended import KaggleApi
+
     logger = logging.getLogger(__name__)
     DIR_DATA_RAW = Path(os.getenv("DIR_DATA_RAW"))
 
@@ -42,5 +44,6 @@ if __name__ == '__main__':
     # find .env automagically by walking up directories until it's found, then
     # load up the .env entries as environment variables
     load_dotenv(find_dotenv(), override=True)
+    load_dotenv(find_dotenv(".secrets"), override=True)
 
     app()
