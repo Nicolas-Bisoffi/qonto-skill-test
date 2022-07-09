@@ -32,6 +32,7 @@ lint:
 
 ## Set up python interpreter environment
 create_environment:
+	poetry env use python3.9
 	poetry config virtualenvs.in-project true --local
 	poetry install
 
