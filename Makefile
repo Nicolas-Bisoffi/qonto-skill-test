@@ -33,9 +33,9 @@ lint:
 ## Set up python interpreter environment
 create_dev-environment:
 	python3 -m venv .venv-dev
-	source .venv-dev/bin/activate
+	. .venv-dev/bin/activate
 	pip install -r requirements-dev.txt
-	python -m ipykernel install --user --name=auto-ds
+	python3 -m ipykernel install --user --name=auto-ds
 
 ## Set up python interpreter environment
 create_environment:
