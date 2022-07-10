@@ -46,17 +46,21 @@ Project Organization
 
 # Instructions
 
-    1. Afin d'éviter un maximum de frictions, je vous invite à lancer le projet dans un workspace Gitpod (.gitpod.yml décrit les quelques étapes de paramètrages néessaires lors de la 1ère utilisation du répertoire).
-    Pour un lancement local, installer pyenv (make get_pyenv), poetry (make get_poetry), créer le .venv (make create_environment) et ajouter la racine du projet au PYTHONPATH (make add_pythonpath)
-    2. Activer le .venv créé lors de l'étape 1 (source .venv/bin/activate). 
-    3. Renseigner le nom d'utilisateur et le mot de passe de votre compte Kaggle dans le fichier .secrets à la racine du projet.
-    3. Téléchargement des données depuis Kaggle (depuis la racine du projet: python3 src/data/download_data.py)
-    4. Nettoyage des données (depuis la racine du projet: python3 src/data/make_dataset.py <OPTIONNAL data_to_be_cleaned_filename>)
-    5. Entraînement du modèle de machine learning (depuis la racine du projet: python3 src/models/train_model.py <OPTIONNAL training_filename>)
-    6. Prédiction des données (depuis la racine du projet: python3 src/models/predict.py <predict_filename>)
-    
-    Optionnel:
-        - Créer un .venv-dev python3.8.10 à l'aide de requirements-dev.txt, et utiliser notebooks/auto-ds.ipynb
-        - A l'aide de .venv, utiliser notebooks/modeling.ipynb, notebooks/eda.ipynb ou notebooks/visualizations.ipynb
+    1. In order to avoid any frictions I advise you to run this project using Gitpod. The repository is public so
+    you can just build a workspace from it. If you want to run it localy on your device you need to have 
+    python 3.8 installed, poetry and pyenv or you can use the make commands to download everything needed. 
+    For the next steps I assume that you will run it from Gitpod but the comands and steps remain the same if you 
+    choose the local way.
+    2. Activate the virtual env automatically created at the start of the instance using source .venv/bin/activate
+    3. Put your Kaggle username and password in the .secrets file.
+    4. Download the data from Kaggle using python3 src/data/download_data.py
+    5. Create the cleaned dataset useful in the next steps using python3 src/data/make_dataset.py
+    6. Time to train the model using python3 src/models/train_model.py
+    7. You can run the predictions using python3 src/models/predict.py
+    The predictions are made from the same file used for the training but you can use any file with the right format
+    just by placing it in the data/processed/ folder then adding the name of the file at the end of the command. 
 
- 
+    Optional :
+        - Create a .venv-dev using the requirements-dev.txt to run the notebook auto-ds
+        - You can run all the other notebooks in the regular virtual environment
+  

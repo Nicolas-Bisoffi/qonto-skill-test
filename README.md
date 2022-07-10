@@ -37,50 +37,57 @@ This is a fraud detection problem so it could be advised using either supervised
 
 ### 5.2. Data
 
-What data will you use to train your model? What input data is needed during serving?
+To train the model we will use the dataset directly from Kaggle, create some features and select the ones interesting 
+after the EDA.
 
 ### 5.3. Techniques
 
-What machine learning techniques will you use? How will you clean and prepare the data (e.g., excluding outliers) and create features?
+As it is a test I will try some different machine learning models and select the one with the best results in the 
+final training script, the XGB model is the one finally selected.  
+Thanks to the EDA I kept only the transactions type Transfer and Cashout because the others ones have never been flagged
+as fraudulent. I create the feature about the day and hour of the transactions and fix the balances that seems to not
+be correct (amount > 0 but origin and dest balances still equal to 0).  
+We don't need to scale the data for this kind of model so that's all for the preparation side.
 
 ### 5.4. Experimentation & Validation
 
-How will you validate your approach offline? What offline evaluation metrics will you use?
+Some feature analysis have been done and you can find it in the notebooks EDA and Visualization. To save some time 
+the plots are stored in the outputs/reports/figure/ folder and the HTML reports are also stored in the folder outputs/reports/.  
+Of course it's a very unbalanced dataset, but we can remove some useless kind of transactions that have never been fraudulent.  
 
-If you're A/B testing, how will you assign treatment and control (e.g., customer vs. session-based) and what metrics will you measure? What are the success and [guardrail](https://medium.com/airbnb-engineering/designing-experimentation-guardrails-ed6a976ec669) metrics?
-
-### 5.5. Human-in-the-loop
-
-How will you incorporate human intervention into your ML system (e.g., product/customer exclusion lists)?
+To quickly have an idea of what kind of models could be great I used a powerful tool called pycaret that run a bunch
+of models and give you a performance overview. In the Modeling notebook I focus on 2 models, XGB and Linear Regression 
+(even if it not seems to be the best it was the opportunity to test some dataset balancing and scaling).  
+To evaluate this models I used a classic ROC curve and confusion matrix.
 
 ## 7. Appendix
 
 ### 7.1. Alternatives
 
-What alternatives did you consider and exclude? List pros and cons of each alternative and the rationale for your decision.
+I choose the classification way to solve this problem but we could try an other powerful technique using auto encoders
+that are also a classic in the fraud detection problems.  
+These networks are slitly more difficult to build than classic ML models and the classic ones already have strong 
+performances so I kept this way.
 
 ### 7.2. Experiment Results
 
-Share any results of offline experiments that you conducted.
+All the experiment results can be find either in the pycaret plot stored in the reports folder or in the modeling notebook.
 
 ### 7.3. Performance benchmarks
 
 Share any performance benchmarks you ran (e.g., throughput vs. latency vs. instance size/count).
 
-### 7.4. Milestones & Timeline
+### 7.4 What could be great to add
 
-What are the key milestones for this system and the estimated timeline?
+As this is a test choices has to be made and we could / have to add some stuff to reach the production level.  
+Mainly the Unit Test, the feature creation and preparation was kind of straight forward so it was not really necessary 
+but we definitly have to add some later on. We could also use ML Flow to monitore the model performances and DVC to ensure
+a version control of the data. We could also add some Great Expectation checks to ensure the quality of the data.  
 
-### 7.5. Glossary
-
-Define and link to business or technical terms.
-
-### 7.6. References
-
-Add references that you might have consulted for your methodology.
+And the biggest part is that it's supposed to be a real time model and for this test purpose we treat it as a batch problem.
+In a production environment we would have to build an API or use some cloud hosting to do the inference.
 
 --------
 
 Contributions [welcome](https://github.com/eugeneyan/ml-design-docs/pulls)!
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
-
