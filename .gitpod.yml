@@ -5,8 +5,8 @@
 tasks:
   - name: Create .venv
     init: |
-      pyenv install 3.9.13 
-      pyenv global 3.9.13
+      pyenv install 3.8.10
+      pyenv global 3.8.10
       curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
       export PATH=$PATH:$HOME/.poetry/bin
       export PYTHONPATH="$PWD"
