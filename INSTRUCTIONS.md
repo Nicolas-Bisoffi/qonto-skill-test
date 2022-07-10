@@ -47,7 +47,7 @@ Project Organization
 # Instructions
 
     1. Afin d'éviter un maximum de frictions, je vous invite à lancer le projet dans un workspace Gitpod (.gitpod.yml décrit les quelques étapes de paramètrages néessaires lors de la 1ère utilisation du répertoire).
-    2. Sur gitpod, le .venv est créé automatiquement. En local, le créer (make create_environment).
+    Pour un lancement local, installer pyenv (make get_pyenv), poetry (make get_poetry), créer le .venv (make create_environment) et ajouter la racine du projet au PYTHONPATH (make add_pythonpath)
     2. Activer le .venv créé lors de l'étape 1 (source .venv/bin/activate). 
     3. Renseigner le nom d'utilisateur et le mot de passe de votre compte Kaggle dans le fichier .secrets à la racine du projet.
     3. Téléchargement des données depuis Kaggle (depuis la racine du projet: python3 src/data/download_data.py)

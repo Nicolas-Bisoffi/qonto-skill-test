@@ -26,6 +26,15 @@ clean:
 lint:
 	flake8 src
 
+## Get Poetry
+get_poetry:
+	curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+	env PATH=$(PATH):$(HOME)/.poetry/bin
+
+## Get Pyenv
+get_pyenv:
+	curl https://pyenv.run | bash
+
 ## Set up python interpreter environment
 create_dev-environment:
 	python3 -m venv .venv-dev
@@ -35,9 +44,13 @@ create_dev-environment:
 
 ## Set up python interpreter environment
 create_environment:
-	poetry env use python3.9
+	poetry env use python3.8
 	poetry config virtualenvs.in-project true --local
 	poetry install
+
+## Add PYTHONPATH
+add_pythonpath:
+	env PYTHONPATH=$(PROJECT_DIR) /bin/bash
 
 ## Serve documentation
 serve_documentation:
