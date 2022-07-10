@@ -47,11 +47,12 @@ Project Organization
 # Instructions
 
     1. Afin d'éviter un maximum de frictions, je vous invite à lancer le projet dans un workspace Gitpod (.gitpod.yml décrit les quelques étapes de paramètrages néessaires lors de la 1ère utilisation du répertoire).
-    2. Activer le .venv créé lors de l'étape 1 (source .venv/bin/activate)
-    3. Renseigner le nom d'utilisateur et le mot de passe de votre compte Kaggle dans le fichier .secrets
+    2. Sur gitpod, le .venv est créé automatiquement. En local, le créer (make create_environment).
+    2. Activer le .venv créé lors de l'étape 1 (source .venv/bin/activate). 
+    3. Renseigner le nom d'utilisateur et le mot de passe de votre compte Kaggle dans le fichier .secrets à la racine du projet.
     3. Téléchargement des données depuis Kaggle (depuis la racine du projet: python3 src/data/download_data.py)
-    4. Nettoyage des données (depuis la racine du projet: python3 src/data/make_dataset.py <data_to_be_cleaned_filename>)
-    5. Entraînement du modèle de machine learning (depuis la racine du projet: python3 src/models/train_model.py <training_filename>)
+    4. Nettoyage des données (depuis la racine du projet: python3 src/data/make_dataset.py <OPTIONNAL data_to_be_cleaned_filename>)
+    5. Entraînement du modèle de machine learning (depuis la racine du projet: python3 src/models/train_model.py <OPTIONNAL training_filename>)
     6. Prédiction des données (depuis la racine du projet: python3 src/models/predict.py <predict_filename>)
     
     Optionnel:
