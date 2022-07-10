@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import logging
+import os
+from pathlib import Path
+
+import pandas as pd
 
 import typer
-import os
 from dotenv import find_dotenv, load_dotenv
-from pathlib import Path
-import pandas as pd
 from xgboost.sklearn import XGBClassifier
-
 
 app = typer.Typer()
 

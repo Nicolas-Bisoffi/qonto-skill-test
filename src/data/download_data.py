@@ -1,9 +1,9 @@
 import logging
+import os
+from pathlib import Path
 
 import typer
-import os
 from dotenv import find_dotenv, load_dotenv
-from pathlib import Path
 
 KAGGLE_FILENAME: str = "ealaxi/paysim1"
 

@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
 import logging
+import os
+from pathlib import Path
+from typing import List
+
+import pandas as pd
 
 import typer
-import os
 from dotenv import find_dotenv, load_dotenv
-from pathlib import Path
-import pandas as pd
-from typing import List
-from src.features.build_features import (
-    compute_balance_error,
-    compute_hours_and_days,
-    fix_null_balances,
-)
-
+from src.features.build_features import (compute_balance_error,
+                                         compute_hours_and_days,
+                                         fix_null_balances)
 
 app = typer.Typer()
 
