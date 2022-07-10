@@ -27,7 +27,7 @@ def main(filename=filename):
     DIR_DATA_PROCESSED = Path(os.getenv("DIR_DATA_PROCESSED"))
     DIR_OUTPUTS = Path(os.getenv("DIR_OUTPUTS"))
 
-    logger.info('Loading cleaned data & model')
+    logger.info("Loading cleaned data & model")
     X = pd.read_csv(f"{DIR_DATA_PROCESSED}/{filename}.csv")
 
     # to facilitate usage
@@ -37,15 +37,15 @@ def main(filename=filename):
     clf = xgb.XGBClassifier()
     clf.load_model(f"{DIR_OUTPUTS}/models/model.pkl")
 
-    logger.info('Predicting using machine learning model')
+    logger.info("Predicting using machine learning model")
     y_pred = clf.predict_proba(X)
 
     np.savetxt(f"{DIR_OUTPUTS}/predictions/predictions.csv", y_pred)
-    logger.info('Predictions saved in (outputs/predictions/)')
+    logger.info("Predictions saved in (outputs/predictions/)")
 
 
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+if __name__ == "__main__":
+    log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     logging.basicConfig(level=logging.INFO, format=log_fmt)
 
     # not used in this stub but often useful for finding various files
@@ -56,4 +56,3 @@ if __name__ == '__main__':
     load_dotenv(find_dotenv(), override=True)
 
     app()
-

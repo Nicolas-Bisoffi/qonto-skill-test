@@ -26,12 +26,12 @@ def main(filename=filename):
     DIR_DATA_PROCESSED = Path(os.getenv("DIR_DATA_PROCESSED"))
     DIR_OUTPUTS = Path(os.getenv("DIR_OUTPUTS"))
 
-    logger.info('Loading cleaned data')
+    logger.info("Loading cleaned data")
     df = pd.read_csv(f"{DIR_DATA_PROCESSED}/{filename}.csv")
     X = df.drop(columns=target_column)
     y = df[target_column]
 
-    logger.info('Training machine learning model')
+    logger.info("Training machine learning model")
     clf = XGBClassifier(**hyperparameters)
 
     clf.fit(X, y)
@@ -39,8 +39,8 @@ def main(filename=filename):
     clf.save_model(f"{DIR_OUTPUTS}/models/model.pkl")
 
 
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+if __name__ == "__main__":
+    log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     logging.basicConfig(level=logging.INFO, format=log_fmt)
 
     # not used in this stub but often useful for finding various files
@@ -51,4 +51,3 @@ if __name__ == '__main__':
     load_dotenv(find_dotenv(), override=True)
 
     app()
-

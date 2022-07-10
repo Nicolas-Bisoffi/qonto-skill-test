@@ -5,7 +5,7 @@ import os
 from dotenv import find_dotenv, load_dotenv
 from pathlib import Path
 
-KAGGLE_FILENAME: str = 'ealaxi/paysim1'
+KAGGLE_FILENAME: str = "ealaxi/paysim1"
 
 app = typer.Typer()
 
@@ -22,20 +22,16 @@ def main():
     logger = logging.getLogger(__name__)
     DIR_DATA_RAW = Path(os.getenv("DIR_DATA_RAW"))
 
-    logger.info(
-        "Authenticate on the Kaggle API"
-    )
+    logger.info("Authenticate on the Kaggle API")
     kaggle_api = KaggleApi()
     kaggle_api.authenticate()
 
-    logger.info(
-        "Download data & store in the raw data folder"
-    )
+    logger.info("Download data & store in the raw data folder")
     kaggle_api.dataset_download_files(KAGGLE_FILENAME, path=DIR_DATA_RAW, unzip=True)
 
 
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+if __name__ == "__main__":
+    log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     logging.basicConfig(level=logging.INFO, format=log_fmt)
 
     # not used in this stub but often useful for finding various files
