@@ -54,7 +54,7 @@ add_pythonpath:
 
 ## Serve documentation
 serve_documentation:
-	PYTHONPATH=src mkdocs serve
+	portray server
 
 ## Test python environment is setup correctly
 test_environment:
